@@ -1,0 +1,6 @@
+[submodule "game_server/skynet"]
+	path = game_server/skynet
+	url = https://github.com/cloudwu/skynet.git
+[submodule "game_server/externals"]
+	path = game_server/externals
+	url = https://github.com/aasdpiao/externals.git

@@ -1,0 +1,36 @@
+include "config.path"
+
+preload = root.."preload/preload.lua"
+thread = 4
+logger = root.."skynet.log"
+logpath = "."
+harbor = 0
+start = "main"
+bootstrap = "snlua bootstrap"
+daemon = "./skynet.pid"
+
+--游戏端口
+debug_console_port = 8000
+game_port = 8888
+http_port = 8002
+server_id = 1
+clustername = "gameserver1"
+
+--开服时间
+start_time = "2021-04-07 00:10:00"
+--数据库
+mysqlhost = "127.0.0.1"
+mysqlport = 3306
+mysqluser = "mazestown"
+mysqlpass = "123456"
+
+township_gamedb = "mazestown_gamedb"
+
+--redis
+redis_maxinst = 1			-- redis最大实例数
+redis_host = "127.0.0.1"	-- redis数据库IP
+redis_port = 6379			-- redis数据库端口
+redis_auth = "123456"		-- redis数据库密码
+
+-- 后台接口配置
+api_host = "http://127.0.0.1:8080"
