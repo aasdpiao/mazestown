@@ -1,7 +1,6 @@
 local PriorityQueue = require "priority_queue"
 local Timer = class()
 
-
 function Timer:ctor()
     self.__timer_id = 0
     self.__callbacks = {}
@@ -9,11 +8,11 @@ function Timer:ctor()
 end
 
 function Timer:fix_timestamp(timestamp)
-    self.__timedefault = timestamp - os.time() 
+    self.__timedefault = (timestamp - skynet.time()) * 1000
 end
 
 function Timer:get_current_time()
-    return os.time() + self.__timedefault
+    return math.floor(skynet.time() * 1000 + self.__timedefault) 
 end
 
 function Timer:init()
@@ -31,7 +30,7 @@ end
 function Timer:update()
     while true do
         self:on_time_out()
-        skynet.sleep(100)
+        skynet.sleep(10)
     end
 end
 
@@ -53,7 +52,6 @@ function Timer:on_time_out()
         loop_actions[#loop_actions+1] = action
     end)
     if table.empty(loop_actions) then return end
-    syslog.debug("loop_actions",table.tostring(loop_actions))
     for _,action in ipairs(loop_actions) do
         self:register(action.interval,action.callback,action.loop)
     end
@@ -62,7 +60,7 @@ end
 function Timer:register(interval, callback, loop)
     assert(type(interval) == "number")
     interval = math.max(interval,0)
-    local timestamp = interval + self:get_current_time()
+    local timestamp = interval * 1000 + self:get_current_time()
     local timer_id = self:get_timer_id()
     local action = {}
     action.callback = callback

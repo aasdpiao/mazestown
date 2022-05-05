@@ -6,10 +6,6 @@ function get_random_int(mix,max)
 	return random(mix,max)
 end
 
-function get_transaction_id()
-	return get_random_int(1,999999999)
-end
-
 function check_random_weight(weight,times)
     local fix_weight = (random_const[math.ceil(weight)] or 0) * times
     local random_value = get_random_int(1,10000000) * 0.0001
@@ -62,11 +58,6 @@ function get_random_list_in_weight(total_weight,value_weight_list,count)
 end
 
 function choice_random_list(random_list)
-	local total_weight = 0
-	local value_weight_list = {}
-	for i,v in ipairs(random_list) do
-		total_weight = total_weight + 10
-		value_weight_list[i] = {v,10}
-	end
-	return get_random_value_in_weight(total_weight,value_weight_list)
+	local random_index = get_random_int(1,#random_list)
+	return random_list[random_index]
 end
