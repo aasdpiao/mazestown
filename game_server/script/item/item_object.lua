@@ -59,4 +59,15 @@ function ItemObject:update_data_attrs(data_attrs)
     self.__role_object:send_request("update_item_data_attrs",{item_id=self.__item_id,item_attrs = item_attrs})
 end
 
+function ItemObject:set_itam_attr(attr_key,attr_value)
+    self:update_data_attrs({attr_key = attr_value})
+end
+
+function ItemObject:get_item_attr(attr_key,default_value)
+    if attr_key == ITEM_KEYS.ITEM_COUNT then
+        return self.__item_count
+    end
+    return self.__item_attrs[attr_key] or default_value
+end
+
 return ItemObject
